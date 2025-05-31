@@ -1,0 +1,38 @@
+{
+  "name": "kupipodariday",
+  "version": "0.0.1",
+  "author": "Evgeniia Kurakina",
+  "description": "KupiPodariDay - Student project",
+  "private": true,
+  "workspaces": [
+    "kupipodariday-backend",
+    "kupipodariday-frontend"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --prefix kupipodariday-backend && npm install --prefix kupipodariday-frontend",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd kupipodariday-backend && npm run start:dev",
+    "dev:frontend": "cd kupipodariday-frontend && npm start",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd kupipodariday-backend && npm run build",
+    "build:frontend": "cd kupipodariday-frontend && npm run build",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend:serve\"",
+    "start:backend": "cd kupipodariday-backend && npm run start:prod",
+    "start:frontend:serve": "cd kupipodariday-frontend && npx serve -s build -l 3000",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd kupipodariday-backend && npm test",
+    "test:frontend": "cd kupipodariday-frontend && npm test -- --watchAll=false",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd kupipodariday-backend && npm run lint",
+    "lint:frontend": "cd kupipodariday-frontend && npm run lint || echo 'Frontend lint not configured'",
+    "clean": "rimraf kupipodariday-backend/dist kupipodariday-backend/node_modules kupipodariday-frontend/build kupipodariday-frontend/node_modules node_modules"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "rimraf": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}
